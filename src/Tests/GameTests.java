@@ -29,12 +29,12 @@ public class GameTests {
     public void testValidMoveOutOfBounds() {
         Game game = new Game(new Player(), new Player());
         try {
-            game.makeMove(-1, -2);
+            game.makeMove(-1);
         } catch (InvalidMoveException e) {
             assertEquals(e.getClass(), InvalidMoveException.class);
         }
         try {
-            game.makeMove(3, 3);
+            game.makeMove(9);
         } catch (InvalidMoveException e) {
             assertEquals(e.getClass(), InvalidMoveException.class);
         }
@@ -44,12 +44,12 @@ public class GameTests {
     public void testValidMoveCellTaken() {
         Game game = new Game(new Player(), new Player());
         try {
-            game.makeMove(1, 1);
+            game.makeMove(1);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
         try {
-            game.makeMove(1, 1);
+            game.makeMove(1);
         } catch (InvalidMoveException e) {
             assertEquals(e.getClass(), InvalidMoveException.class);
         }
@@ -59,39 +59,39 @@ public class GameTests {
     public void testSwitchCurrentPlayer() {
         Game game = new Game(new Player(), new Player());
         try {
-            game.makeMove(1, 1);
+            game.makeMove(1);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
-        char[][] arr = game.getGameBoard();
-        assertEquals(arr[1][1], 'X');
+        char[] arr = game.getGameBoard();
+        assertEquals(arr[1], 'X');
 
         try {
-            game.makeMove(2, 2);
+            game.makeMove(2);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
-        char[][] arr2 = game.getGameBoard();
-        assertEquals(arr2[2][2], 'O');
+        char[] arr2 = game.getGameBoard();
+        assertEquals(arr2[2], 'O');
 
         try {
-            game.makeMove(0, 0);
+            game.makeMove(0);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
-        char[][] arr3 = game.getGameBoard();
-        assertEquals(arr2[0][0], 'X');
+        char[] arr3 = game.getGameBoard();
+        assertEquals(arr2[0], 'X');
     }
 
     @Test
     public void testCheckWinnerRow() {
         Game game = new Game(new Player(), new Player());
         try {
-            game.makeMove(0, 0);
-            game.makeMove(1, 1);
-            game.makeMove(0, 1);
-            game.makeMove(2, 2);
-            game.makeMove(0, 2);
+            game.makeMove(0);
+            game.makeMove(2);
+            game.makeMove(3);
+            game.makeMove(5);
+            game.makeMove(6);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
@@ -102,11 +102,11 @@ public class GameTests {
     public void testCheckWinnerColumn() {
         Game game = new Game(new Player(), new Player());
         try {
-            game.makeMove(0, 0);
-            game.makeMove(1, 1);
-            game.makeMove(1, 0);
-            game.makeMove(2, 2);
-            game.makeMove(2, 0);
+            game.makeMove(0);
+            game.makeMove(6);
+            game.makeMove(1);
+            game.makeMove(5);
+            game.makeMove(2);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
@@ -116,11 +116,11 @@ public class GameTests {
     public void testCheckWinnerCross() {
         Game game = new Game(new Player(), new Player());
         try {
-            game.makeMove(0, 0);
-            game.makeMove(1, 2);
-            game.makeMove(1, 1);
-            game.makeMove(2, 1);
-            game.makeMove(2, 2);
+            game.makeMove(0);
+            game.makeMove(3);
+            game.makeMove(4);
+            game.makeMove(5);
+            game.makeMove(8);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
@@ -128,11 +128,11 @@ public class GameTests {
 
         Game game2 = new Game(new Player(), new Player());
         try {
-            game2.makeMove(0, 2);
-            game2.makeMove(1, 2);
-            game2.makeMove(1, 1);
-            game2.makeMove(2, 1);
-            game2.makeMove(2, 0);
+            game2.makeMove(2);
+            game2.makeMove(1);
+            game2.makeMove(4);
+            game2.makeMove(5);
+            game2.makeMove(6);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
@@ -145,11 +145,11 @@ public class GameTests {
         Player O = new Player();
         Game game = new Game(X, O);
         try {
-            game.makeMove(0, 2);
-            game.makeMove(1, 2);
-            game.makeMove(1, 1);
-            game.makeMove(2, 1);
-            game.makeMove(2, 0);
+            game.makeMove(0);
+            game.makeMove(2);
+            game.makeMove(3);
+            game.makeMove(5);
+            game.makeMove(6);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }
@@ -157,12 +157,12 @@ public class GameTests {
 
         Game game2 = new Game(X, O);
         try {
-            game2.makeMove(0, 0);
-            game2.makeMove(1, 1);
-            game2.makeMove(1, 2);
-            game2.makeMove(0, 1);
-            game2.makeMove(2, 2);
-            game2.makeMove(2, 1);
+            game2.makeMove(1);
+            game2.makeMove(0);
+            game2.makeMove(2);
+            game2.makeMove(3);
+            game2.makeMove(5);
+            game2.makeMove(6);
         } catch (InvalidMoveException e) {
             e.printStackTrace();
         }

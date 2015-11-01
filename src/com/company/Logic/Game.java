@@ -29,24 +29,25 @@ public class Game {
         return state;
     }
 
-    private boolean checkWin(int x, int y) {
-        char currentMark = getMark();
-        if(gameBoard.getCell(x, 0) == currentMark && gameBoard.getCell(x, 1) == currentMark && gameBoard.getCell(x, 2) == currentMark)
-            return true;
-        if(gameBoard.getCell(0, y) == currentMark && gameBoard.getCell(1, y) == currentMark && gameBoard.getCell(2, y) == currentMark)
-            return true;
-        if(gameBoard.getCell(0, 0) == currentMark && gameBoard.getCell(1, 1) == currentMark && gameBoard.getCell(2, 2) == currentMark)
-            return true;
-        if(gameBoard.getCell(2, 0) == currentMark && gameBoard.getCell(1, 1) == currentMark && gameBoard.getCell(0, 2) == currentMark)
-            return true;
-
-        return false;
+    private boolean tileStreak(int a, int b, int c) {
+        char x = gameBoard.getCell(a);
+        char y = gameBoard.getCell(b);
+        char z = gameBoard.getCell(c);
+        return x != ' ' && x == y && y == z;
     }
 
-    public void makeMove(int x, int y) throws InvalidMoveException {
-        if(validMove(x, y)) {
-            gameBoard.makeMove(x, y, getMark());
-            if(checkWin(x, y)) {
+    private boolean checkWin() {
+        return (tileStreak(0,1,2) || tileStreak(3,4,5)
+                || tileStreak(6,7,8) || tileStreak(0,3,6)
+                || tileStreak(1,4,7) || tileStreak(2,5,8)
+                || tileStreak(0,4,8) || tileStreak(2,4,6)
+        );
+    }
+
+    public void makeMove(int tile) throws InvalidMoveException {
+        if(validMove(tile)) {
+            gameBoard.makeMove(tile, getMark());
+            if(checkWin()) {
                 state = State.WINNER;
                 winner = currentPlayer;
                 return;
@@ -71,12 +72,10 @@ public class Game {
         return currentPlayer == player1 ? 'X' : 'O';
     }
 
-    private boolean validMove(int x, int y) {
-        if(x > 2 || y > 2)
+    private boolean validMove(int tile) {
+        if(tile > 8 || tile < 0)
             return false;
-        if(x < 0 || y < 0)
-            return false;
-        if(!gameBoard.isCellEmpty(x, y))
+        if(!gameBoard.isCellEmpty(tile))
             return false;
 
         return true;
@@ -86,7 +85,7 @@ public class Game {
         return winner;
     }
 
-    public char[][] getGameBoard() {
+    public char[] getGameBoard() {
         return gameBoard.getBoard();
     }
 
@@ -99,9 +98,9 @@ public class Game {
         boolean valid;
         do {
             valid = true;
-            int []arr = ai.generateMove();
+            int choice = ai.generateMove();
             try {
-                makeMove(arr[0], arr[1]);
+                makeMove(choice);
             }catch (InvalidMoveException e) {
                 valid = false;
             }

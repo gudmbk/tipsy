@@ -6,34 +6,31 @@ package com.company.Domain;
  * kt: 110384-3279
  */
 public class GameBoard {
-    private char board[][];
+    private char board[];
     private int cellsFull;
 
     public GameBoard() {
-        board = new char[3][3];
-        for(char space[] : board) {
-            space[0] = ' ';
-            space[1] = ' ';
-            space[2] = ' ';
-        }
+        board = new char[9];
+        for(int i = 0; i < 9; i++)
+            board[i] = ' ';
         cellsFull = 0;
     }
 
-    public char[][] getBoard() {
+    public char[] getBoard() {
         return board;
     }
 
-    public void makeMove(int x, int y, char mark) {
-        board[x][y] = mark;
+    public void makeMove(int tile, char mark) {
+        board[tile] = mark;
         cellsFull++;
     }
 
-    public char getCell(int x, int y) {
-        return board[x][y];
+    public char getCell(int tile) {
+        return board[tile];
     }
 
-    public boolean isCellEmpty(int x, int y) {
-        return board[x][y] == ' ';
+    public boolean isCellEmpty(int tile) {
+        return board[tile] == ' ';
     }
 
     public boolean isBoardFull() {

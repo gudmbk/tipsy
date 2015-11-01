@@ -28,6 +28,7 @@ public class Console implements GUI{
                     else
                         game.computerMove();
                 }
+                drawBoard(game.getGameBoard());
                 announceWinner(game.getWinner());
             }
             quit = playAgain();
@@ -39,12 +40,11 @@ public class Console implements GUI{
         do {
             valid = true;
             Scanner in = new Scanner(System.in);
-            System.out.println("Choose cell. In the format x y");
-            int x = in.nextInt();
-            int y = in.nextInt();
+            System.out.println("Choose cell. In the format 0-8");
+            int tile = in.nextInt();
             in.nextLine();
             try {
-                game.makeMove(x, y);
+                game.makeMove(tile);
             }catch (InvalidMoveException e) {
                 valid = false;
                 System.out.println("Cell is already taken or invalid. Try again...");
@@ -52,20 +52,22 @@ public class Console implements GUI{
         }while(!valid);
     }
 
-    private void drawBoard(char[][] board) {
+    private void drawBoard(char[] board) {
         StringBuilder string = new StringBuilder();
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                string.append("[" + board[x][y] + "]");
-            }
-            string.append("\n");
+        for (int x = 1; x < 10; x++) {
+            string.append("[" + board[x-1] + "]");
+            if(x % 3 == 0)
+                string.append("\n");
         }
+        string.append("\n");
         System.out.print(string);
     }
 
     private void announceWinner(Player winner) {
-        if(winner == null)
+        if(winner == null) {
             System.out.println("The game ended with a tie");
+            return;
+        }
 
         if(winner.getIsHuman())
             System.out.println("Congratulations " + winner.getName() + " you won!");

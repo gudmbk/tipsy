@@ -30,8 +30,8 @@ public class Player {
         this.isHuman = isHuman;
     }
 
-    public int[] generateMove() {
-        return new int[2];
+    public int generateMove() {
+        return -1;
     }
 
 }

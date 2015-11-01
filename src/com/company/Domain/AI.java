@@ -13,11 +13,9 @@ public class AI extends Player {
         isHuman = false;
     }
     @Override
-    public int[] generateMove() {
+    public int generateMove() {
         Random rand = new Random();
-        int x = rand.nextInt(3 - 0);
-        int y = rand.nextInt(3 - 0);
-        int[] arr = {x, y};
-        return arr;
+        int choice = rand.nextInt(9 - 0);
+        return choice;
     }
 }

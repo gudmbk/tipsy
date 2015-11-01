@@ -42,6 +42,7 @@ public class Console implements GUI{
             System.out.println("Choose cell. In the format x y");
             int x = in.nextInt();
             int y = in.nextInt();
+            in.nextLine();
             try {
                 game.makeMove(x, y);
             }catch (InvalidMoveException e) {
@@ -76,7 +77,7 @@ public class Console implements GUI{
         Scanner in = new Scanner(System.in);
         System.out.println("Do you want to play another game (y for yes or any other to quit");
         String cont = in.nextLine();
-        return cont != "y\n";
+        return cont == "y";
     }
 
     private Game setUp() {

@@ -3,11 +3,6 @@ package com.company.Logic;
 import com.company.Domain.GameBoard;
 import com.company.Domain.Player;
 
-/**
- * Created by Gudmundur Bjarni Kristinsson on 31-Oct-15.
- * gudmundurk14@ru.is
- * kt: 110384-3279
- */
 public class Game {
     private Player player1;
     private Player player2;

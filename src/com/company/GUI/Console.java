@@ -8,11 +8,6 @@ import com.company.Logic.State;
 
 import java.util.Scanner;
 
-/**
- * Created by Gudmundur Bjarni Kristinsson on 31-Oct-15.
- * gudmundurk14@ru.is
- * kt: 110384-3279
- */
 public class Console implements GUI{
     @Override
     public void run() {
